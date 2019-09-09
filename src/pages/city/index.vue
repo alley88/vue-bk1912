@@ -1,55 +1,59 @@
 <template>
   <div class="city_body">
     <!--热门城市-->
-    <div class="hot_city">
-      <div class="hot_title">热门城市</div>
-      <div class="hot_city_list">
-        <div class="hot_city_name">北京</div>
-        <div class="hot_city_name">北京</div>
-        <div class="hot_city_name">北京</div>
-        <div class="hot_city_name">北京</div>
-        <div class="hot_city_name">北京</div>
-      </div>
-    </div>
-    <!--城市列表-->
-    <div class="city_list">
-      <div class="city_list_item">
-        <div class="city_title_letter">A</div>
-        <div class="city_list_name">
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
+    <Alley-Bscroll>
+      <div class="content_city">
+        <div class="hot_city">
+          <div class="hot_title">热门城市</div>
+          <div class="hot_city_list">
+            <div class="hot_city_name">北京</div>
+            <div class="hot_city_name">北京</div>
+            <div class="hot_city_name">北京</div>
+            <div class="hot_city_name">北京</div>
+            <div class="hot_city_name">北京</div>
+          </div>
+        </div>
+        <!--城市列表-->
+        <div class="city_list">
+          <div class="city_list_item">
+            <div class="city_title_letter">A</div>
+            <div class="city_list_name">
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+            </div>
+          </div>
+          <div class="city_list_item">
+            <div class="city_title_letter">A</div>
+            <div class="city_list_name">
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+            </div>
+          </div>
+          <div class="city_list_item">
+            <div class="city_title_letter">A</div>
+            <div class="city_list_name">
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+              <div class="city_list_name_item">北京</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="city_list_item">
-        <div class="city_title_letter">A</div>
-        <div class="city_list_name">
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-        </div>
-      </div>
-      <div class="city_list_item">
-        <div class="city_title_letter">A</div>
-        <div class="city_list_name">
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-          <div class="city_list_name_item">北京</div>
-        </div>
-      </div>
-    </div>
+    </Alley-Bscroll>
     <!--城市列表下标-->
     <div class="city_list_index">
       <div class="index_item">A</div>
@@ -65,6 +69,7 @@
 <style>
 .city_body {
   background: #ebebeb;
+  height: 100%;
 }
 
 /*热门城市*/

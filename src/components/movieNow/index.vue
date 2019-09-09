@@ -1,53 +1,81 @@
 <template>
-  <div class="movie_body">
-    <div class="movie_item" v-for="(item,index) in movieNow" :key="index">
-      <div class="movie_item_pic">
-        <img :src="item.img | toImg('128.180')" />
+  <Alley-Bscroll ref="scroll">
+    <div class="movie_body">
+      <div class="movie_item" v-for="(item,index) in movieNow" :key="index">
+        <div class="movie_item_pic">
+          <img :src="item.img | toImg('128.180')" />
+        </div>
+        <div class="movie_item_info">
+          <h2>{{item.nm}}</h2>
+          <p>
+            观众评:
+            <span class="grade">{{item.sc}}</span>
+          </p>
+          <p>
+            主演：
+            <span>{{item.star}}</span>
+          </p>
+          <p>
+            <span>{{item.showInfo}}</span>
+          </p>
+        </div>
+        <div
+          :class="item.globalReleased?'movie_item_btn asale':'movie_item_btn ticket'"
+        >{{item.globalReleased?'购票':'预售'}}</div>
       </div>
-      <div class="movie_item_info">
-        <h2>{{item.nm}}</h2>
-        <p>
-          观众评:
-          <span class="grade">{{item.sc}}</span>
-        </p>
-        <p>
-          主演：
-          <span>{{item.star}}</span>
-        </p>
-        <p>
-          <span>{{item.showInfo}}</span>
-        </p>
-      </div>
-      <div 
-        :class="item.globalReleased?'movie_item_btn asale':'movie_item_btn ticket'"
-      >{{item.globalReleased?'购票':'预售'}}</div>
     </div>
-  </div>
+  </Alley-Bscroll>
 </template>
 <script>
-import {movieNowApi} from "@api"
+import { movieNowApi } from "@api";
 export default {
-  name:"MovieNow",
- async created(){
-   let data = await movieNowApi();
-    console.log(data.data.movieList)
-    this.movieNow = data.data.movieList
- },
- data(){
-   return {
-     movieNow:[]
-   }
- }
-}
+  name: "MovieNow",
+  async created() {
+    let data = await movieNowApi();
+    this.movieNow = data.data.movieList;
+  },
+  data() {
+    return {
+      movieNow: [],
+      flag:false
+    };
+  },
+  mounted(){
+    //下拉刷新
+    this.$refs.scroll.handlepullingDown(async ()=>{
+      //下拉刷新的事情
+      var arr = [20,40,51,52,56,70,76];
+      var index = parseInt(Math.random()*8);
+      let data = await movieNowApi(arr[index]);
+
+      if(data.msg == "ok"){
+          this.movieNow = data.data.movieList;
+          this.$refs.scroll.handlefinishPullDown();
+      }
+    })
+
+    //上拉加载更多  BUG
+    this.$refs.scroll.handlepullingUp(async ()=>{
+         let data = await movieNowApi();
+         if(data.msg == "ok"){
+             this.movieNow =  [...this.movieNow,...data.data.movieList];  
+         }
+        
+    })
+  },
+  updated(){
+   
+    this.$refs.scroll.handlefinishPullUp();
+  }
+};
 </script>
 
 
 <style>
 #content .movie_body {
-  height: 100%;
-  padding-bottom: 1rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
+  padding-top: .9rem;
   overflow-x: hidden;
 }
 #content .movie_body .movie_item {
@@ -55,6 +83,7 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ccc;
+  background: #fff;
 }
 #content .movie_body .movie_item .movie_item_pic {
   width: 1.28rem;

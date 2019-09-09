@@ -5,6 +5,7 @@ import store from "./store"
 import AlleyUI from "@lib"
 import "@common/style/index.css";
 import "@common/filter"
+import "@lib/loading/index.js";
 Vue.config.productionTip = false
 Vue.use(AlleyUI);
 

@@ -11,11 +11,17 @@ export default {
         {
             path:"movieNow",
             name:"movieNow",
+            meta:{
+                flag:true
+            },
             component:()=>import("@components/movieNow")
         },
         {
             path:"movieComming",
             name:"movieComming",
+            meta:{
+                flag:true
+            },
             component:()=>import("@components/movieComming")
         }
     ]

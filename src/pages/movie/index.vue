@@ -48,6 +48,10 @@ export default {
   align-items: center;
   padding: 0 0.4rem;
   border: 1px solid #e6e6e6;
+  position: fixed;
+  z-index:2;
+  left: 0;
+  top:.88rem;
 }
 #content .movie_menu .movie_menu_city span {
   font-size: 0.3rem;

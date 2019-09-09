@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <Alley-TabBar/>
+    <Alley-TabBar v-if="$route.meta.flag"/>
   </div>
 </template>
 <script>
@@ -14,5 +14,7 @@ export default {
 }
 </script>
 <style lang="scss">
-
+#app{
+  height: 100%;
+}
 </style>

@@ -1,11 +1,11 @@
 import http from "@utils/http.js"
 
 //正在热映
-export const movieNowApi = ()=> http({
+export const movieNowApi = (id=10)=> http({
     method:"get",
     url:"/api/movieOnInfoList",
     data:{
-        cityId:10
+        cityId:id
     }
 })
 

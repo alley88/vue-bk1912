@@ -1,7 +1,8 @@
 import Header from "./header/index.vue"
-
+import Bscroll from "./bscroll/index.vue";
 const components = [
     Header,
+    Bscroll
 ]
 
 

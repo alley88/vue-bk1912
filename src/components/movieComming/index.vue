@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper">
+    <Alley-Bscroll>
     <div class="movie_body">
       <div class="movie_item" v-for="(item,index) in comingList" :key="index">
         <div class="movie_item_pic">
@@ -24,11 +24,11 @@
         >{{item.showst==1?'想看':'预售'}}</div>
       </div>
     </div>
-  </div>
+   </Alley-Bscroll>
 </template>
 <script>
 import { movieCommingApi } from "@api";
-import BScroll from "better-scroll";
+
 export default {
   name: "MovieComming",
   async created() {
@@ -40,9 +40,6 @@ export default {
     return {
       comingList: []
     };
-  },
-  mounted(){
-    new BScroll(this.$refs.wrapper);
   }
 };
 </script>
@@ -53,8 +50,7 @@ export default {
   height: 100%;
 }
 #content .movie_body {
- 
-  padding-bottom: 1rem;
+  padding-top: .9rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
   overflow-x: hidden;
