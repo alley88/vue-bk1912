@@ -8,6 +8,7 @@
 - 图片懒加载
 - 数据缓存
 - better-scroll
+- vue-touch
 
 
 

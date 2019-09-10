@@ -6,6 +6,7 @@
 </template>
 <script>
 import TabBar from "@components/tabBar"
+import axios from "axios"
 export default {
     name:"App",
     components:{

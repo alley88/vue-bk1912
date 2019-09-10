@@ -43,6 +43,10 @@ export default {
             //并且重新计算滚动区域的高度
             this.scroll.refresh();
          
+        },
+        //滚动到指定位置
+        handleScrollTop(t){
+            this.scroll.scrollTo(0,-t,300)
         }
     }
 }
