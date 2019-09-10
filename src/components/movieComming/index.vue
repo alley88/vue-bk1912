@@ -1,7 +1,10 @@
 <template>
     <Alley-Bscroll>
     <div class="movie_body">
-      <div class="movie_item" v-for="(item,index) in comingList" :key="index">
+      <router-link
+        tag="div"
+        :to='{name:"detail",params:{id:item.id}}'
+       class="movie_item" v-for="(item,index) in comingList" :key="index">
         <div class="movie_item_pic">
           <img :src="item.img | toImg('128.180')" />
         </div>
@@ -22,7 +25,7 @@
           class
           :class="item.showst==1?'movie_item_btn Want':'movie_item_btn ticket'"
         >{{item.showst==1?'想看':'预售'}}</div>
-      </div>
+      </router-link>
     </div>
    </Alley-Bscroll>
 </template>
@@ -31,14 +34,22 @@ import { movieCommingApi } from "@api";
 
 export default {
   name: "MovieComming",
-  async created() {
-    let data = await movieCommingApi();
-    console.log(data);
-    this.comingList = data.data.comingList;
+  async activated() {
+    if(this.cityId != this.$store.state.city.id || !sessionStorage.getItem("comingList")){
+      let data = await movieCommingApi(this.$store.state.city.id);
+      this.comingList = data.data.comingList;
+      sessionStorage.setItem("comingList",JSON.stringify(data.data.comingList))
+
+      this.cityId = this.$store.state.city.id;
+    }else{
+      this.comingList = JSON.parse(sessionStorage.getItem("comingList"))
+    }
+    
   },
   data() {
     return {
-      comingList: []
+      comingList: [],
+      cityId:1
     };
   }
 };

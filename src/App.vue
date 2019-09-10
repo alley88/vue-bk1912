@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+   <keep-alive>
+      <router-view></router-view>
+   </keep-alive>
+   
     <Alley-TabBar v-if="$route.meta.flag"/>
   </div>
 </template>

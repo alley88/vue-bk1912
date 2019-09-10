@@ -7,7 +7,6 @@
           <div class="hot_title">热门城市</div>
           <div class="hot_city_list">
             <div class="hot_city_name" v-for="(item,index) in hotCity" :key="index">{{item.nm}}</div>
-
           </div>
         </div>
         <!--城市列表-->
@@ -15,7 +14,12 @@
           <div class="city_list_item" v-for="(item,index) in cityList" :key="index">
             <div class="city_title_letter">{{item.index}}</div>
             <div class="city_list_name">
-              <div class="city_list_name_item" v-for="(child,idx) in item.list" :key="idx">{{child.nm}}</div>
+              <v-touch 
+                tag="div"
+                @tap="handleToMovie(child)"
+                class="city_list_name_item" 
+                v-for="(child,idx) in item.list" 
+                :key="idx">{{child.nm}}</v-touch>
             </div>
           </div>
          
@@ -35,11 +39,14 @@
   </div>
 </template>
 <script>
-import {mapActions,mapState} from "vuex"
+import {mapActions,mapState, mapMutations} from "vuex"
 export default {
   name:"City",
   created(){
-    this.handleGetCity();
+    if(!sessionStorage.getItem("hotCity") || !sessionStorage.getItem("cityList")){
+        this.handleGetCity();
+    }
+    
   },
   computed:{
     ...mapState({
@@ -51,6 +58,9 @@ export default {
     ...mapActions({
       handleGetCity:"city/handleGetCity"
     }),
+    ...mapMutations({
+      handleModifyCityInfo:"city/handleModifyCityInfo"
+    }),
     handleTo(index){
       var IndexList = this.$refs.list.querySelectorAll(".city_title_letter");
      
@@ -58,6 +68,10 @@ export default {
 
 
       this.$refs.scroll.handleScrollTop(IndexList[index].offsetTop)
+    },
+    handleToMovie(info){
+      this.$router.push("/movie");
+      this.handleModifyCityInfo(info);
     }
   },
  

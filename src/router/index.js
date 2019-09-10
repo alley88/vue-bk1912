@@ -5,6 +5,7 @@ import cinema from "./cinema"
 import mine from "./mine"
 import city from "./city"
 import search from "./search"
+import detail from "./detail"
 Vue.use(VueRouter);
 
 
@@ -19,7 +20,8 @@ const router = new VueRouter({
         cinema,
         mine,
         city,
-        search
+        search,
+        detail
     ]
 })
 

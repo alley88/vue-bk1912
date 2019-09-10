@@ -1,27 +1,29 @@
 <template>
   <div>
-    <Alley-Header />
+    <Alley-Header>
+      <p>&lt;</p>
+    </Alley-Header>
     <div id="content">
       <div class="search_movie_body">
       <div class="search_movie_input">
-        <input type="text" />
+        <input type="text" v-model="movieName"/>
       </div>
       <h2>电影/电视剧/综艺</h2>
-      <div class="movie_item">
+      <div class="movie_item" v-for="(item,index) in searchList" :key="index">
         <div class="movie_item_pic">
-          <img src="https://p0.meituan.net/128.180/movie/5fafb7789f769e3571f4b6da489aa2f8295918.jpg" />
+          <img :src="item.img | toImg('128.180')" />
         </div>
         <div class="movie_item_info">
-          <h2>无名之辈</h2>
+          <h2>{{item.nm}}</h2>
           <p>
-            <span class="person">67554</span>人想看
+            <span class="person">{{item.wish}}</span>人想看
           </p>
           <p>
             主演：
-            <span>Alley 吴彦祖 胡歌</span>
+            <span>{{item.star}}</span>
           </p>
           <p>
-            <span>2019-05-20上映</span>
+            <span>{{item.pubDesc}}</span>
           </p>
         </div>
         <div class="movie_item_btn person">想看</div>
@@ -30,7 +32,41 @@
     </div>
   </div>
 </template>
-
+<script>
+import {movieSearch} from "@api"
+import {mapState} from "vuex";
+import {throttle} from "@utils"
+export default {
+  name:"Search",
+  data(){
+    return {
+      movieName:"",
+      searchList:[]
+    }
+  },
+  created(){
+    this.searchFn = throttle( async (newVal)=>{
+       let data =await movieSearch(this.cityId,newVal);
+        
+        if(data.data.movies){
+          this.searchList = data.data.movies.list
+        }
+    })
+  },
+  computed:{
+    ...mapState({
+      cityId:state=>state.city.id
+    })
+  },
+  watch:{
+  movieName(newVal,oldVal){
+      if(newVal == oldVal)return;
+      
+         this.searchFn(newVal);
+    }
+  }
+}
+</script>
 <style>
 /*movie_body*/
 #content .search_movie_body {
@@ -38,6 +74,7 @@
   padding-bottom: 1rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
+  padding-top: .88rem;
   overflow-x: hidden;
 }
 

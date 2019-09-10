@@ -15,3 +15,7 @@
 
 # 面试题总结
 **父组件如何调用子组件中的方法**
+> this.$refs.属性
+
+**Vuex中的数据刷新浏览器后丢失如何解决**
+> 存入到本地(localstorage  sessionStorage)

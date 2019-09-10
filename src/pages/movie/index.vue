@@ -6,7 +6,7 @@
       <!-- 首页的导航开始 -->
       <div class="movie_menu">
         <router-link to="/city" tag="div" class="movie_menu_city">
-          <span>北京</span>
+          <span>{{$store.state.city.nm}}</span>
           <i class="iconfont">&#xe627;</i>
         </router-link>
         <ul class="movie_menu_switch">
@@ -18,12 +18,15 @@
         </router-link>
       </div>
       <!-- 导航结束的部分 -->
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Movie"
 };

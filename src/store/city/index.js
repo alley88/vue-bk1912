@@ -1,10 +1,19 @@
 import {getCity} from "@api/city";
 const state = {
-    hotCity :[],
-    cityList: []
+    hotCity : JSON.parse(sessionStorage.getItem("hotCity"))||[],
+    cityList: JSON.parse(sessionStorage.getItem("cityList"))||[],
+    nm:sessionStorage.getItem("nm")||"北京",
+    id:sessionStorage.getItem("id")||1
 }
 
 const mutations = {
+    handleModifyCityInfo(state,info){
+        state.nm = info.nm;
+        state.id = info.id
+
+        sessionStorage.setItem("nm",info.nm);
+        sessionStorage.setItem("id",info.id);
+    },
     handleMutationGetCity(state,params){
         let city = params.cities
         /*
@@ -77,7 +86,8 @@ const mutations = {
         state.hotCity = hotCity;
         state.cityList = cityList;
 
-      
+        sessionStorage.setItem("hotCity",JSON.stringify(hotCity))
+        sessionStorage.setItem("cityList",JSON.stringify(cityList))
         
 
         
